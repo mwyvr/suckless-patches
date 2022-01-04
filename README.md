@@ -21,19 +21,20 @@ Patched dwm by hand with the following:
   some changes that made my own bar customizations less hacky. My bar is pretty
   bland. 
 
-* Made bar height padding a constant in config.def.h (original default is 2, to
-  my eye, somewhat larger font sizes look a bit crowded without a bit more
-  space (4 or 6px). No independent patch exists, it's two lines of change.
+* Made bar height padding a constant (`barpadpx`) in config.def.h (original
+  default is 2, to my eye, somewhat larger font sizes look a bit crowded
+  without a bit more space (4 or 6px).
 
 ## dmenu
 
-* Ditto for bar height.
+* Implemented the same `barpadpx` configuration knob as in patched dwm. Patch:
+  solutionroute/suckless/patches/[dmenu-barpadpx-20220104.diff](https://github.com/solutionroute/suckless/blob/main/patches/dmenu-barpadpx-20220104.diff)
 
 
 ## slock
 
 A two-line patch to add class hint ("slock") to make it easy for users of
-compositors like `picom` to enforce opacity. Because... maybe a translucent lock
-screen isn't a good idea for some of us. 
+compositors like `picom` to enforce opacity. Because... maybe a translucent
+lock screen isn't a good idea for some of us. 
 
-* From solutionroute/suckless/patches/[slock-setclasshint-20220104-35633d4.diff](https://github.com/solutionroute/suckless/blob/main/patches/slock-setclasshint-20220104-35633d4.diff)
+* Patch: solutionroute/suckless/patches/[slock-setclasshint-20220104-35633d4.diff](https://github.com/solutionroute/suckless/blob/main/patches/slock-setclasshint-20220104-35633d4.diff)
