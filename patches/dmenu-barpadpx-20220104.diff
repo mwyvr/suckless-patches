@@ -1,0 +1,27 @@
+diff --git a/dmenu/config.def.h b/dmenu/config.def.h
+index 1edb647..0cb9dff 100644
+--- a/dmenu/config.def.h
++++ b/dmenu/config.def.h
+@@ -1,7 +1,8 @@
+ /* See LICENSE file for copyright and license details. */
+ /* Default settings; can be overriden by command line. */
+ 
+-static int topbar = 1;                      /* -b  option; if 0, dmenu appears at bottom     */
++static int topbar = 1;                      /* -b  option; if 0, dmenu appears at bottom */
++static const unsigned int barpadpx     = 2;    /* n pixels total padding status bar height */
+ /* -fn option overrides fonts[0]; default X11 font or font set */
+ static const char *fonts[] = {
+        "monospace:size=10"
+diff --git a/dmenu/dmenu.c b/dmenu/dmenu.c
+index 03a15d9..cfefed3 100644
+--- a/dmenu/dmenu.c
++++ b/dmenu/dmenu.c
+@@ -619,7 +619,7 @@ setup(void)
+        utf8 = XInternAtom(dpy, "UTF8_STRING", False);
+ 
+        /* calculate menu geometry */
+-       bh = drw->fonts->h + 6;
++       bh = drw->fonts->h + barpadpx;
+        lines = MAX(lines, 0);
+        mh = (lines + 1) * bh;
+ #ifdef XINERAMA
