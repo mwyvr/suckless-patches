@@ -5,7 +5,7 @@ See also my corresponding https://github.com/solutionroute/dotfiles.
 
 ## dwm
 
-Patched dwm by hand with the following:
+Patched dwm with the following:
 
 * From suckless.org/patches/[rmaster](https://dwm.suckless.org/patches/rmaster/),
   making it possible to swap the master/client with a toggle, ideal for those
@@ -33,8 +33,15 @@ Patched dwm by hand with the following:
 
 ## slock
 
-A two-line patch to add class hint ("slock") to make it easy for users of
-compositors like `picom` to enforce opacity. Because... maybe a translucent
-lock screen isn't a good idea for some of us. 
+Here's a two-line patch to add class hint ("slock") to make it easy for users
+of compositors like `picom` to enforce opacity. Because... maybe a translucent
+lock screen isn't a good idea for some of us. IMO this should be a mainline
+change as it would allow `dwm`, `dmenu` and `slock` to behave the same with a
+`picom` rule:
+
+    opacity-rule = [ 
+       "100:class_g = 'dwm'",   # window manager https://suckless.org/
+       "100:class_g = 'dmenu'", # wm's application menu bar
+       "100:class_g = 'slock'", # don't want a transparent lock screen! (patched version)
 
 * Patch: solutionroute/suckless/patches/[slock-setclasshint-20220104-35633d4.diff](https://github.com/solutionroute/suckless/blob/main/patches/slock-setclasshint-20220104-35633d4.diff)
