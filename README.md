@@ -1,11 +1,13 @@
 # suckless
-Patched/personalized suckless tools including dwm, dmenu, slstatus. See: https://dwm.suckless.org/
+Patched suckless tools: dwm, dmenu and slock. See: https://dwm.suckless.org/
 
 See also my corresponding https://github.com/solutionroute/dotfiles.
 
 ## dwm
 
-Patched dwm with the following:
+My `config.h` personalizations [20220104-mw-dwm-config.h.diff](https://github.com/solutionroute/suckless/blob/main/patches/20220104-mw-dwm-config.h.diff)
+apply to the patched `dwm` in this repo. Change summary:
+
 
 * From suckless.org/patches/[rmaster](https://dwm.suckless.org/patches/rmaster/),
   making it possible to swap the master/client with a toggle, ideal for those
@@ -45,3 +47,4 @@ change as it would allow `dwm`, `dmenu` and `slock` to behave the same with a
        "100:class_g = 'slock'", # don't want a transparent lock screen! (patched version)
 
 * Patch: solutionroute/suckless/patches/[slock-setclasshint-20220104-35633d4.diff](https://github.com/solutionroute/suckless/blob/main/patches/slock-setclasshint-20220104-35633d4.diff)
+
