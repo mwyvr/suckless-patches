@@ -1,0 +1,13 @@
+diff --git a/stock/config.def.h b/config.h
+index 93a875a..f6ac09c 100644
+--- a/stock/config.def.h
++++ b/config.h
+@@ -65,5 +65,7 @@ static const char unknown_str[] = "n/a";
+  */
+ static const struct arg args[] = {
+ 	/* function format          argument */
+-	{ datetime, "%s",           "%F %T" },
++	{ cpu_perc, "cpu %s%% · ",  NULL },
++	{ ram_perc, "ram %s%% · ",  NULL },
++	{ datetime, "%s",			"Week %U · %A, %B %e %l:%M %p" },
+ };
