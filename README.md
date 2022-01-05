@@ -35,7 +35,7 @@ apply to the patched `dwm` in this repo. Change summary:
 
 ## slock
 
-Here's a two-line patch to add class hint ("slock") to make it easy for users
+Here's a three-line patch to add class hint ("slock") to make it easy for users
 of compositors like `picom` to enforce opacity. Because... maybe a translucent
 lock screen isn't a good idea for some of us. IMO this should be a mainline
 change as it would allow `dwm`, `dmenu` and `slock` to behave the same with a
@@ -54,6 +54,6 @@ change as it would allow `dwm`, `dmenu` and `slock` to behave the same with a
 
 ## Obligatory Screenshot
 
-Here's a pretty bland screenshot, but do remember, bland was my objective. In practice, I use the multiple desktops and tag feature to move windows to keep my working desktop simple to remove distraction. 
+This is a bland screenshot, but do remember, bland was my objective. In practice, I use `dwm` multiple desktops and move-to-tag feature (or auto window movement) to keep my working desktop(s) simple and distraction free-ish.
 
 ![Boring "desktop"](https://raw.githubusercontent.com/solutionroute/suckless/main/screenshots/20220104-172007.png)
