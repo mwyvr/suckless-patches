@@ -48,3 +48,6 @@ change as it would allow `dwm`, `dmenu` and `slock` to behave the same with a
 
 * Patch: solutionroute/suckless/patches/[slock-setclasshint-20220104-35633d4.diff](https://github.com/solutionroute/suckless/blob/main/patches/slock-setclasshint-20220104-35633d4.diff)
 
+## slstatus
+
+* [Minor personalization only](https://github.com/solutionroute/suckless/blob/main/patches/20220104-mw-slstatus-config.h.diff), I don't want a busy status bar. 
