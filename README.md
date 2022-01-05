@@ -52,8 +52,58 @@ change as it would allow `dwm`, `dmenu` and `slock` to behave the same with a
 
 * [Minor personalization only](https://github.com/solutionroute/suckless/blob/main/patches/20220104-mw-slstatus-config.h.diff), I don't want a busy status bar. 
 
+## Example .xinitrc & related
+
+`.xinitrc`:
+
+    # Dell 2719DG left on amdgpu, Dell 2720DC right on nvidia
+    xrandr --output HDMI-A-1-0 --mode 2560x1440 --primary --output DP-4 --mode 2560x1440 --right-of HDMI-A-1-0
+
+    # Following for VS Code persistent auth
+    # see https://unix.stackexchange.com/a/295652/332452
+    source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+
+    # see https://wiki.archlinux.org/title/GNOME/Keyring#xinitrc
+    eval $(/usr/bin/gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+
+    # see https://github.com/NixOS/nixpkgs/issues/14966#issuecomment-520083836
+    mkdir -p "$HOME"/.local/share/keyrings
+
+    # Start dwm in a looping sh script makes customization easier
+    exec ~/bin/startdwm.sh
+    # exec dwm
+
+`startdwm.sh` loop allows for restart of dwm (and supporting apps) without
+losing open windows. `picom` in particular will barf on config file mistages.
+
+    #!/bin/sh
+    while true; do
+
+        # clean up
+        killall nitrogen picom slstatus xss-lock slock
+
+        # wallpaper - https://wiki.archlinux.org/title/nitrogen
+        exec nitrogen --restore &
+
+        # compositor (adjust opacity in one app, not many)
+        picom --config ~/.config/picom.conf  &
+
+        # screen lock tied to ACPI autolocks my system in several minutes
+        # dwm win+l and win|shift|l key bindings for on-demand lock and suspend
+        xss-lock slock &
+
+        slstatus &
+
+        # dwm 2> ~/.dwm.log
+        dwm >/dev/null 2>&1
+
+    done
+
 ## Obligatory Screenshot
 
-This is a bland screenshot, but do remember, bland was my objective. In practice, I use `dwm` multiple desktops and move-to-tag feature (or auto window movement) to keep my working desktop(s) simple and distraction free-ish.
+This is a bland screenshot, as bland is my objective. In practice, I use `dwm`
+multiple desktops and move-to-tag feature (or auto window movement) to keep my
+working desktop(s) simple and distraction free(ish).
 
 ![Boring "desktop"](https://raw.githubusercontent.com/solutionroute/suckless/main/screenshots/20220104-172007.png)
