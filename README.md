@@ -51,3 +51,9 @@ change as it would allow `dwm`, `dmenu` and `slock` to behave the same with a
 ## slstatus
 
 * [Minor personalization only](https://github.com/solutionroute/suckless/blob/main/patches/20220104-mw-slstatus-config.h.diff), I don't want a busy status bar. 
+
+## Obligatory Screenshot
+
+Here's a pretty bland screenshot, but do remember, bland was my objective. In practice, I use the multiple desktops and tag feature to move windows to keep my working desktop simple to remove distraction. 
+
+![Boring "desktop"](https://raw.githubusercontent.com/solutionroute/suckless/main/screenshots/20220104-172007.png)
