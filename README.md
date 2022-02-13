@@ -5,8 +5,13 @@ See also my corresponding https://github.com/solutionroute/dotfiles.
 
 ## dwm
 
-My `config.h` personalizations [20220104-mw-dwm-config.h.diff](https://github.com/solutionroute/suckless/blob/main/patches/20220104-mw-dwm-config.h.diff)
-apply to the patched `dwm` in this repo. Change summary:
+Combined patches rolled up into one diff: [dwm-mw-20220212.diff](https://github.com/solutionroute/suckless/blob/main/dwm-mw-20220212.diff)
+
+Changes include adding some colours in support of colorbar, and:
+
+* Made bar height padding a constant (`barpadpx`) in config.def.h (original
+  default is 2, to my eye, somewhat larger font sizes look a bit crowded
+  without a bit more space (4 or 6px).
 
 * From suckless.org/patches/[pertag](https://dwm.suckless.org/patches/pertag/), 
   the ability to have different layouts for each tag.
@@ -19,10 +24,6 @@ apply to the patched `dwm` in this repo. Change summary:
 * From suckless.org/patches/[colorbar](https://dwm.suckless.org/patches/colorbar/),
   some changes that made my own bar customizations less hacky. My bar is pretty
   bland.  Blander, but only one colour, than the sock dwm!
-
-* Made bar height padding a constant (`barpadpx`) in config.def.h (original
-  default is 2, to my eye, somewhat larger font sizes look a bit crowded
-  without a bit more space (4 or 6px).
 
 ## dmenu
 
