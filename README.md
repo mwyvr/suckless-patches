@@ -44,7 +44,7 @@ ability to toggle where the master pane goes, right or left.
 ![pertag - tag 1](https://raw.githubusercontent.com/solutionroute/suckless/main/screenshots/pertag1.png)
 **Tag 1**
 
-![pertag - tag 2)(https://raw.githubusercontent.com/solutionroute/suckless/main/screenshots/pertag2.png)
+![pertag - tag 2](https://raw.githubusercontent.com/solutionroute/suckless/main/screenshots/pertag2.png)
 **Tag 2**
  
 And a boring big two monitor desktop:
