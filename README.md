@@ -5,9 +5,8 @@ See also my corresponding https://github.com/solutionroute/dotfiles.
 
 ## dwm
 
-Combined patches rolled up into one diff: [dwm-mw-20220212.diff](https://github.com/solutionroute/suckless/blob/main/dwm-mw-20220212.diff)
-
-Changes include adding some colours in support of colorbar, and:
+Combined patches rolled up into one diff: [dwm-mw-20220212.diff](https://github.com/solutionroute/suckless/blob/main/dwm-mw-20220212.diff). 
+The changes include adding some colours in support of colorbar, and:
 
 * Made bar height padding a constant (`barpadpx`) in config.def.h (original
   default is 2, to my eye, somewhat larger font sizes look a bit crowded
@@ -31,7 +30,8 @@ Changes include adding some colours in support of colorbar, and:
 
 ## slock
 
-Feb 2022: Did away with a patch I'd added to avoid making slock translucent via picom/compton. Instead, this in picom.conf does the job:
+Feb 2022: Did away with a patch I'd added to avoid making slock translucent via picom/compton. 
+Instead, this in picom.conf does the job:
 
     # exclude dwm, dmenu and the slock screen locker
     focus-exclude = "x = 0 && y = 0 && override_redirect = true";
