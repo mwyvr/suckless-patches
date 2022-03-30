@@ -1,0 +1,88 @@
+diff -p1 st/config.def.h st-mw/config.def.h
+*** st/config.def.h	2022-03-30 15:23:23.081798777 -0700
+--- st-mw/config.def.h	2022-03-30 15:26:06.755628246 -0700
+***************
+*** 7,9 ****
+   */
+! static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+  static int borderpx = 2;
+--- 7,9 ----
+   */
+! static char *font = "Roboto Mono:size=12:antialias=true:autohint=true";
+  static int borderpx = 2;
+*************** static const char *colorname[] = {
+*** 98,117 ****
+  	/* 8 normal colors */
+! 	"black",
+! 	"red3",
+! 	"green3",
+! 	"yellow3",
+! 	"blue2",
+! 	"magenta3",
+! 	"cyan3",
+! 	"gray90",
+  
+  	/* 8 bright colors */
+! 	"gray50",
+! 	"red",
+! 	"green",
+! 	"yellow",
+! 	"#5c5cff",
+! 	"magenta",
+! 	"cyan",
+! 	"white",
+  
+--- 98,117 ----
+  	/* 8 normal colors */
+! 	"#282a2e",  /* black */
+! 	"#a54242",  /* red */
+! 	"#8c9440",  /* green */
+! 	"#de935f",  /* yellow */
+! 	"#5f819d",  /* blue */
+! 	"#85678f",  /* magenta */
+! 	"#5e8d87",  /* cyan */
+! 	"#707880",  /* gray */
+  
+  	/* 8 bright colors */
+! 	"#373b41",  /* black */
+! 	"#cc6666",  /* red */
+! 	"#b5bd68",  /* green */
+! 	"#f0c674",  /* yellow */
+! 	"#81a2be",  /* blue */
+! 	"#b294bb",  /* magenta */
+! 	"#8abeb7",  /* cyan */
+! 	"#c5c8c6",  /* gray */
+  
+*************** static const char *colorname[] = {
+*** 122,125 ****
+  	"#555555",
+! 	"gray90", /* default foreground colour */
+! 	"black", /* default background colour */
+  };
+--- 122,125 ----
+  	"#555555",
+! 	"#c5c8c6", /* default foreground colour */
+! 	"#1a191d", /* default background colour */
+  };
+Only in st-mw: config.h
+Common subdirectories: st/.git and st-mw/.git
+diff -p1 st/Makefile st-mw/Makefile
+*** st/Makefile	2022-03-30 15:23:23.081798777 -0700
+--- st-mw/Makefile	2022-03-30 15:26:25.657621173 -0700
+*************** install: st
+*** 51,52 ****
+--- 51,54 ----
+  	@echo Please see the README file regarding the terminfo entry of st.
++ 	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
++ 	cp -f st.desktop $(DESTDIR)$(PREFIX)/share/applications
+  
+*************** uninstall:
+*** 55,56 ****
+--- 57,59 ----
+  	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
++ 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop
+  
+Only in st-mw: st
+Only in st-mw: st.desktop
+Only in st-mw: st.o
+Only in st-mw: x.o
