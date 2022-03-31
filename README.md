@@ -7,6 +7,8 @@ See also my corresponding https://github.com/solutionroute/dotfiles.
 
 * terminal.sexy colours 
 * Roboto Mono font, size 11
+* add "scroll" (You'll need to clone, edit in mouse wheel lines in
+  <https://git.suckless.org/scroll>, make && sudo make install)
 * st.desktop for use with desktop environments; map keyboard shortcut
   alt-shift-enter to st for a pleasant experience in GNOME. :-) Note: I found I
   had to install `libxft-bgra` to stop crashing on GNOME but it very well may

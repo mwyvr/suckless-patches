@@ -1,6 +1,6 @@
 diff -p1 -N st/config.def.h st-mw/config.def.h
-*** st/config.def.h	2022-03-31 09:48:08.700357009 -0700
---- st-mw/config.def.h	2022-03-31 09:38:55.598328398 -0700
+*** st/config.def.h	2022-03-31 10:56:28.980004648 -0700
+--- st-mw/config.def.h	2022-03-31 10:55:03.451772659 -0700
 ***************
 *** 7,9 ****
    */
@@ -10,6 +10,15 @@ diff -p1 -N st/config.def.h st-mw/config.def.h
    */
 ! static char *font = "Roboto Mono:size=11:antialias=true:autohint=true";
   static int borderpx = 2;
+*************** char *utmp = NULL;
+*** 21,23 ****
+  /* scroll program: to enable use a string like "scroll" */
+! char *scroll = NULL;
+  char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
+--- 21,23 ----
+  /* scroll program: to enable use a string like "scroll" */
+! char *scroll = "scroll";
+  char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 *************** static const char *colorname[] = {
 *** 98,117 ****
   	/* 8 normal colors */
@@ -65,7 +74,7 @@ diff -p1 -N st/config.def.h st-mw/config.def.h
 ! 	"#20232b", /* default background colour */
   };
 diff -p1 -N st/Makefile st-mw/Makefile
-*** st/Makefile	2022-03-31 09:48:08.700357009 -0700
+*** st/Makefile	2022-03-31 10:56:28.980004648 -0700
 --- st-mw/Makefile	2022-03-30 15:26:25.657621173 -0700
 *************** install: st
 *** 51,52 ****
