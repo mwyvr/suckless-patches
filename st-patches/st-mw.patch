@@ -1,6 +1,6 @@
 diff -p1 st/config.def.h st-mw/config.def.h
-*** st/config.def.h	2022-03-30 15:23:23.081798777 -0700
---- st-mw/config.def.h	2022-03-30 15:26:06.755628246 -0700
+*** st/config.def.h	2022-03-31 09:36:41.001213438 -0700
+--- st-mw/config.def.h	2022-03-31 09:32:28.196886826 -0700
 ***************
 *** 7,9 ****
    */
@@ -8,7 +8,7 @@ diff -p1 st/config.def.h st-mw/config.def.h
   static int borderpx = 2;
 --- 7,9 ----
    */
-! static char *font = "Roboto Mono:size=12:antialias=true:autohint=true";
+! static char *font = "Roboto Mono:size=11:antialias=true:autohint=true";
   static int borderpx = 2;
 *************** static const char *colorname[] = {
 *** 98,117 ****
@@ -62,12 +62,11 @@ diff -p1 st/config.def.h st-mw/config.def.h
 --- 122,125 ----
   	"#555555",
 ! 	"#c5c8c6", /* default foreground colour */
-! 	"#1a191d", /* default background colour */
+! 	"#20232b", /* default background colour */
   };
-Only in st-mw: config.h
 Common subdirectories: st/.git and st-mw/.git
 diff -p1 st/Makefile st-mw/Makefile
-*** st/Makefile	2022-03-30 15:23:23.081798777 -0700
+*** st/Makefile	2022-03-31 09:36:41.001213438 -0700
 --- st-mw/Makefile	2022-03-30 15:26:25.657621173 -0700
 *************** install: st
 *** 51,52 ****
@@ -82,7 +81,4 @@ diff -p1 st/Makefile st-mw/Makefile
   	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 + 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop
   
-Only in st-mw: st
 Only in st-mw: st.desktop
-Only in st-mw: st.o
-Only in st-mw: x.o
