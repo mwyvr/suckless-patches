@@ -3,6 +3,15 @@ Patches customizing or adding functionality to suckless tools: dwm and dmenu. Se
 
 See also my corresponding https://github.com/solutionroute/dotfiles.
 
+## st
+
+* terminal.sexy colours 
+* Roboto Mono font, size 11
+* st.desktop for use with desktop environments; map keyboard shortcut
+  alt-shift-enter to st for a pleasant experience in GNOME. :-) Note: I found I
+  had to install `libxft-bgra` to stop crashing on GNOME but it very well may
+  have been an issue on XOrg as well.
+
 ## dwm
 
 Combined patches rolled up into one diff: [dwm-mw-20220212.diff](https://github.com/solutionroute/suckless-patches/blob/main/dwm-mw-20220212.diff). 
