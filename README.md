@@ -5,7 +5,13 @@ There's a helper script for Void Linux users to move patch files into a local
 `void-packages` repository so we can enjoy patch and build integration with
 standard Void package management tools.
 
-See also https://github.com/solutionroute/dotfiles.
+    ./void-setup.sh
+
+See also https://github.com/solutionroute/dotfiles - the bin directory has a
+git diff helper script to produce patch files from both tracked and untracked
+files. From within a build directory:
+
+    mkgitpatch.sh > "../dwm-mw-`git describe --tags`.diff"
 
 ## Important: Default Font is Roboto Mono
 
@@ -35,13 +41,18 @@ Options:
 ## st
 
 * terminal.sexy colours 
-* Roboto Mono font, size 11
-* add "scroll" (You'll need to clone, edit in mouse wheel lines in
-  <https://git.suckless.org/scroll>, make && sudo make install)
-* st.desktop for use with desktop environments; map keyboard shortcut
-  alt-shift-enter to st for a pleasant experience in GNOME. :-) Note: I found I
-  had to install `libxft-bgra` to stop crashing on GNOME but it very well may
-  have been an issue on XOrg as well.
+* https://st.suckless.org/patches/desktopentry/ st-desktopentry-0.8.4.diff (possibly may need lifxft-bgra installed)
+* https://st.suckless.org/patches/scrollback/ st-scrollback-ringbuffer-0.8.5.diff and st-scrollback-mouse-20220127-2c5edf2.diff
+
+## scroll
+
+An alternative to the scroll patch, not currently not in st as of spring 2022.
+
+Note: If running on a musl based Linux distribution like Alpine, or the musl
+variant of Void Linux, you'll need to provide headers for sys/queue.h. In Void
+that's easy, install:
+
+    sudo xbps-install -Su musl-legacy-compat
 
 ## dwm
 
@@ -79,7 +90,7 @@ No patch; if using a compositor for transparency, prevent slock from becoming tr
 
 `void-setup.sh` copies the latest patches into ~/src/void-packages/srcpkgs/{dwm|st|dmenu}. 
 
-If you've not setup void-packages:
+To setup void-packages:
 
 	mkdir -p ~/src && cd ~/src
 	git clone https://github.com/void-linux/void-packages
