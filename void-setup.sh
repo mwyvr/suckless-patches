@@ -5,7 +5,7 @@ VOID_PACKAGES="$HOME/src/void-packages"
 
 if [ -d $VOID_PACKAGES ]; then
 	echo "Installing patch files"
-	for ipkg in dwm dmenu st; do
+	for ipkg in dwm dmenu st slstatus; do
 		mkdir -p $VOID_PACKAGES/srcpkgs/$ipkg/patches
 		echo "copying $SUCKLESS_PATCHES/$ipkg/* to $VOID_PACKAGES/srcpkgs/$ipkg/patches"
 		cp $SUCKLESS_PATCHES/$ipkg/* $VOID_PACKAGES/srcpkgs/$ipkg/patches
@@ -17,7 +17,8 @@ Patch files copied. To build the packages:
 	cd $VOID_PACKAGES
 	# pkgname = dwm or st or dmenu
 	./xbps-src pkg pkgname
-	xi pkgname
+	# -f to force reinstallation 
+	xi -f pkgname
 "
 else
 
