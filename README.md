@@ -1,7 +1,36 @@
 # suckless patches
 Patches customizing or adding functionality to suckless tools: dwm and dmenu. See: https://dwm.suckless.org/
 
-See also my corresponding https://github.com/solutionroute/dotfiles.
+There's a helper script for Void Linux users to move patch files into a local
+`void-packages` repository so we can enjoy patch and build integration with
+standard Void package management tools.
+
+See also https://github.com/solutionroute/dotfiles.
+
+## Important: Default Font is Roboto Mono
+
+**Warning**
+
+The suckless tool patches refer to the Roboto Mono font which is NOT part of
+the Void fonts-roboto-ttf package. dwm and st will fail to run if you do not
+have the font on your system.
+
+Options:
+
+- change patch to refer generic 'monospace' font,
+- change the patch to point to your preference, or,
+- install Roboto Mono, folloing these steps:
+
+    sudo mkdir -p /usr/share/fonts/TTF
+    sudo wget --content-disposition -P /usr/share/fonts/TTF \
+        https://github.com/googlefonts/RobotoMono/blob/main/fonts/ttf/RobotoMono-{Bold,BoldItalic,Italic,Light,LightItalic,Medium,MediumItalic,Regular,Thin,ThinItalic}.ttf?raw=true
+
+    # rebuild the cache
+    sudo fc-cache
+    # check to see:
+    fc-list | grep -i roboto
+
+## Patch Notes
 
 ## st
 
@@ -41,11 +70,41 @@ The changes include adding some colours in support of colorbar, and:
 
 ## slock
 
-Feb 2022: Did away with a patch I'd added to avoid making slock translucent via picom/compton. 
-Instead, this in picom.conf does the job:
+No patch; if using a compositor for transparency, prevent slock from becoming translucent with:
 
     # exclude dwm, dmenu and the slock screen locker
     focus-exclude = "x = 0 && y = 0 && override_redirect = true";
+
+## Void Linux: void-packages patch and build integration:
+
+`void-setup.sh` copies the latest patches into ~/src/void-packages/srcpkgs/{dwm|st|dmenu}. 
+
+If you've not setup void-packages:
+
+	mkdir -p ~/src && cd ~/src
+	git clone https://github.com/void-linux/void-packages
+    cd void-packages
+
+Configure your preferred mirror first, if the default server in Germany or
+Finland is far from you. For example, to set the mirror `xbps-src` will use for
+bootstrap and building packages, edit `etc/defaults.conf` (etc within the
+void-packages directory):
+
+    # one of the Tier-1 US mirrors:
+    XBPS_MIRROR=https://repo-us.voidlinux.org/current
+
+A list of mirrors can be found at <https://docs.voidlinux.org/xbps/repositories/mirrors/index.html>.
+
+Finish preparing the void-packages local repository and enable restricted
+packages in order to add applications like Zoom or Discord. 
+
+Note: If running Void Linux musl variant (rather than glibc), proprietary
+packages like Zoom or Google Chrome will need to be installed and run using
+other methods such as a glibc chroot or perhaps more conviently for most
+packages, flatpak.
+
+    ./xbps-src binary-bootstrap
+    echo XBPS_ALLOW_RESTRICTED=yes >> etc/conf
 
 ## Obligatory Screenshot
 
