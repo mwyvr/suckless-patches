@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index 93a875a..f03b244 100644
+index 93a875a..ef497c3 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -1,7 +1,7 @@
@@ -11,7 +11,7 @@ index 93a875a..f03b244 100644
  
  /* text to show if no value can be retrieved */
  static const char unknown_str[] = "n/a";
-@@ -64,6 +64,9 @@ static const char unknown_str[] = "n/a";
+@@ -64,6 +64,11 @@ static const char unknown_str[] = "n/a";
   * wifi_essid          WiFi ESSID                      interface name (wlan0)
   */
  static const struct arg args[] = {
@@ -20,8 +20,10 @@ index 93a875a..f03b244 100644
 +	/* function				format		argument */
 +	{ battery_remaining,	"%s",		"BAT0" },
 +	{ battery_state,		" %s",      "BAT0" },
-+	{ battery_perc,			" %s%%",     "BAT0" },
-+	{ datetime,				" %s",      "%F %H:%M" },
++	{ battery_perc,			" %s%%",    "BAT0" },
++	{ wifi_essid,			" · %s",	"wlp0s20f3" },
++	{ wifi_perc,			" %s%%",    "wlp0s20f3" },
++	{ datetime,				" · %s",    "%F %H:%M" },
  };
 diff --git a/config.mk b/config.mk
 index 2516e6e..b0b52c7 100644
