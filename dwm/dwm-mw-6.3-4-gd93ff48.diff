@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index a2ac963..a630711 100644
+index a2ac963..921b2d7 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -3,19 +3,30 @@
@@ -47,7 +47,15 @@ index a2ac963..a630711 100644
  static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
  
  static const Layout layouts[] = {
-@@ -59,6 +70,13 @@ static const Layout layouts[] = {
+@@ -46,6 +57,7 @@ static const Layout layouts[] = {
+ 
+ /* key definitions */
+ #define MODKEY Mod1Mask
++#define SUPERKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+@@ -59,6 +71,16 @@ static const Layout layouts[] = {
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
  static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
  static const char *termcmd[]  = { "st", NULL };
@@ -58,10 +66,13 @@ index a2ac963..a630711 100644
 +static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
 +static const char *brupcmd[] = { "sudo", "brightnessctl", "set", "+5%", NULL };
 +static const char *brdowncmd[] = { "sudo", "brightnessctl", "set", "5%-", NULL };
++static const char *lockcmd[] = { "slock", NULL };
++static const char *sleepcmd[] = { "sudo", "loginctl", "suspend", NULL };
++static const char *hibernatecmd[] = { "sudo", "loginctl", "hibernate", NULL };
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -79,12 +97,19 @@ static Key keys[] = {
+@@ -79,6 +101,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
  	{ MODKEY,                       XK_space,  setlayout,      {0} },
  	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -69,18 +80,23 @@ index a2ac963..a630711 100644
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
  	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
  	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
- 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
- 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
- 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-+	{ 0, XF86XK_AudioMute, spawn, {.v = mutecmd } },
-+	{ 0, XF86XK_AudioMicMute, spawn, {.v = mutemiccmd } },
-+	{ 0, XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
-+	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
-+	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = brupcmd} },
-+	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = brdowncmd} },
- 	TAGKEYS(                        XK_1,                      0)
- 	TAGKEYS(                        XK_2,                      1)
- 	TAGKEYS(                        XK_3,                      2)
+@@ -95,6 +118,16 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	/* custom */
++	{ 0,                            XF86XK_AudioMute, spawn,   {.v = mutecmd } },
++	{ 0,                            XF86XK_AudioMicMute, spawn, {.v = mutemiccmd } },
++	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
++	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
++	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = brupcmd} },
++	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = brdowncmd} },
++	{ SUPERKEY|MODKEY,           XK_l,      spawn,          {.v = lockcmd } },
++	{ SUPERKEY|MODKEY,           XK_s,      spawn,          {.v = sleepcmd } },
++	{ SUPERKEY|MODKEY,           XK_h,      spawn,          {.v = hibernatecmd } },
+ };
+ 
+ /* button definitions */
 diff --git a/dwm.c b/dwm.c
 index 0fc328a..1dd298a 100644
 --- a/dwm.c
