@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index a2ac963..921b2d7 100644
+index a2ac963..9a9bee7 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -3,19 +3,30 @@
@@ -22,19 +22,19 @@ index a2ac963..921b2d7 100644
 +static const char col_gunmetal[]    = "#1F2933";
 +static const char col_charcoal[]    = "#3B5062";
 +static const char col_platinum[]    = "#EAEBEB";
-+static const char col_gainsboro[]    = "#DFE1E0";
++static const char col_fggray[]      = "#959896";
  static const char *colors[][3]      = {
 -	/*               fg         bg         border   */
 -	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 -	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 +	/*                  fg             bg            border   */
-+	[SchemeNorm]    = { col_gainsboro, col_gunmetal, col_gunmetal },
++	[SchemeNorm]    = { col_fggray, col_gunmetal, col_gunmetal },
 +	[SchemeSel]     = { col_platinum,  col_charcoal, col_charcoal },
-+	[SchemeStatus]  = { col_gainsboro, col_gunmetal, "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
-+	[SchemeTagsSel] = { col_gainsboro, col_charcoal, "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
-+	[SchemeTagsNorm]= { col_gainsboro, col_gunmetal, "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
++	[SchemeStatus]  = { col_fggray, col_gunmetal, "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
++	[SchemeTagsSel] = { col_fggray, col_charcoal, "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
++	[SchemeTagsNorm]= { col_fggray, col_gunmetal, "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
 +	[SchemeInfoSel] = { col_platinum,  col_gunmetal, "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
-+	[SchemeInfoNorm]= { col_gainsboro, col_gunmetal, "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
++	[SchemeInfoNorm]= { col_fggray, col_gunmetal, "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
  };
  
  /* tagging */
