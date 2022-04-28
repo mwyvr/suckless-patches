@@ -38,6 +38,17 @@ Options:
 
 ## Patch Notes
 
+## libXft
+
+Courtesy of the work done by https://github.com/uditkarode/libxft-bgra, a patch
+file for libXft (current as of 2.3.4) to enable BGRA colour emojis; without
+such a patch, colour symbols will crash `st` and other suckless apps.
+
+THere's no need to include the "font2" patch in st; but you should install a
+colour emoji font such as:
+
+    xbps-install noto-fonts-emoji
+
 ## st
 
 * terminal.sexy colours 
@@ -131,3 +142,4 @@ ability to toggle where the master pane goes, right or left.
  
 And a boring big two monitor desktop:
 ![Boring "desktop"](https://raw.githubusercontent.com/solutionroute/suckless-patches/main/screenshots/20220104-172007.png)
+libXft-bgra-patch.diff

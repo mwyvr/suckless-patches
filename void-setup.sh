@@ -5,7 +5,7 @@ VOID_PACKAGES="$HOME/src/void-packages"
 
 if [ -d $VOID_PACKAGES ]; then
 	echo "Installing patch files"
-	for ipkg in dwm dmenu st slstatus; do
+	for ipkg in dwm dmenu st slstatus libXft; do
 		mkdir -p $VOID_PACKAGES/srcpkgs/$ipkg/patches
 		echo "copying $SUCKLESS_PATCHES/$ipkg/* to $VOID_PACKAGES/srcpkgs/$ipkg/patches"
 		cp $SUCKLESS_PATCHES/$ipkg/* $VOID_PACKAGES/srcpkgs/$ipkg/patches
