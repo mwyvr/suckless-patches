@@ -1419,8 +1419,7 @@ index 0000000..0f92ef1
 +	"`abcdefghijklmnopqrstuvwxyz{|}~";
 diff --git a/st b/st
 new file mode 100755
-index 0000000..f6791cc
-Binary files /dev/null and b/st differ
+index 0000000..e69de29
 diff --git a/st.desktop b/st.desktop
 new file mode 100644
 index 0000000..49029d8
@@ -1437,9 +1436,7 @@ index 0000000..49029d8
 +Categories=System;TerminalEmulator;
 diff --git a/st.o b/st.o
 new file mode 100644
-index 0000000..eaa2780
-Binary files /dev/null and b/st.o differ
+index 0000000..e69de29
 diff --git a/x.o b/x.o
 new file mode 100644
-index 0000000..2f9353e
-Binary files /dev/null and b/x.o differ
+index 0000000..e69de29
