@@ -1,71 +1,64 @@
 # suckless patches
-Patches customizing or adding functionality to suckless tools: dwm and dmenu. See: https://dwm.suckless.org/
+This repo includes relatively minor tweaks, customizations and additions to
+suckless tools: dwm, dmenu, st, slstatus (desktop & laptop variant) as well as
+a patched libXft / libXft-devel to allow for BRGA colour emojies which would
+crash st if not patched.
 
-There's a helper script for Void Linux users to move patch files into a local
-`void-packages` repository so we can enjoy patch and build integration with
-standard Void package management tools.
+None of these patches are specific to Void Linux.
+
+## Void Linux Script
+`void-setup` moves patch files into the appropriate spot within the
+`void-packages` repository (if you've set one up); check out void-packages, it
+makes it easy to enjoy patch and build integration with standard Void package
+management tools and keep up to date as new package updates roll in.
 
     ./void-setup.sh
+
+The setup script first copies all the relevant patch files over and then
+optionally will build all of them, starting with libXft-devel. You can break
+out at any time.
 
 See also https://github.com/solutionroute/dotfiles - the bin directory has a
 git diff helper script to produce patch files from both tracked and untracked
 files. From within a build directory:
 
+    # one approach
     mkgitpatch.sh > "../dwm-mw-`git describe --tags`.diff"
 
-## Important: Default Font is Roboto Mono
+Patch files manipulated are named <pkg>-sroute-<etc>.diff|$; see the script for why.
 
-**Warning**
+## Important: Default Font is simply "monospace"
 
-The suckless tool patches refer to the Roboto Mono font which is NOT part of
-the Void fonts-roboto-ttf package. dwm and st will fail to run if you do not
-have the font on your system.
-
-Options:
-
-- change patch to refer generic 'monospace' font,
-- change the patch to point to your preference, or,
-- install Roboto Mono, folloing these steps:
-
-    sudo mkdir -p /usr/share/fonts/TTF
-    sudo wget --content-disposition -P /usr/share/fonts/TTF \
-        https://github.com/googlefonts/RobotoMono/blob/main/fonts/ttf/RobotoMono-{Bold,BoldItalic,Italic,Light,LightItalic,Medium,MediumItalic,Regular,Thin,ThinItalic}.ttf?raw=true
-
-    # rebuild the cache
-    sudo fc-cache
-    # check to see:
-    fc-list | grep -i roboto
+You'll want/need to install a monospace font on your system that also modifies
+the appropriate font config entries to establish itself as an available
+monospace font for the system. Not all packages do. Deja Vu Sans Mono will do
+the trick; add more from there.
 
 ## Patch Notes
 
-## libXft
+### libXft-devel & libXft
 
 Courtesy of the work done by https://github.com/uditkarode/libxft-bgra, a patch
 file for libXft (current as of 2.3.4) to enable BGRA colour emojis; without
 such a patch, colour symbols will crash `st` and other suckless apps.
 
-THere's no need to include the "font2" patch in st; but you should install a
+There's no need to include the "font2" patch in st; but you should install a
 colour emoji font such as:
 
     xbps-install noto-fonts-emoji
 
+This patch should be built and installed first; depending on your distro you
+may need to apply the same patch to libXft-devel.
+
 ## st
 
 * terminal.sexy colours 
-* https://st.suckless.org/patches/desktopentry/ st-desktopentry-0.8.4.diff (possibly may need lifxft-bgra installed)
-* https://st.suckless.org/patches/scrollback/ st-scrollback-ringbuffer-0.8.5.diff and st-scrollback-mouse-20220127-2c5edf2.diff
+* alpha patch
+* scroll shift-page up/down and mouse wheel / touchpad two fingers if configured as such
+    * https://st.suckless.org/patches/desktopentry/ st-desktopentry-0.8.4.diff 
+    * https://st.suckless.org/patches/scrollback/ st-scrollback-ringbuffer-0.8.5.diff and st-scrollback-mouse-20220127-2c5edf2.diff
 
-## scroll
-
-An alternative to the scroll patch, not currently not in st as of spring 2022.
-
-Note: If running on a musl based Linux distribution like Alpine, or the musl
-variant of Void Linux, you'll need to provide headers for sys/queue.h. In Void
-that's easy, install:
-
-    sudo xbps-install -Su musl-legacy-compat
-
-## dwm
+### dwm
 
 Combined patches rolled up into one diff: [dwm-mw-20220212.diff](https://github.com/solutionroute/suckless-patches/blob/main/dwm-mw-20220212.diff). 
 The changes include adding some colours in support of colorbar, and:
@@ -86,13 +79,23 @@ The changes include adding some colours in support of colorbar, and:
   some changes that made my own bar customizations less hacky. My bar is pretty
   bland.  Blander, but only one colour, than the sock dwm!
 
-## dmenu
+### dmenu
 
 * Implemented the same `bar_hpadx` configuration knob as in patched dwm. Patch: [dmenu-mw-barpad-20220212.diff](https://github.com/solutionroute/suckless-patches/blob/main/dmenu-mw-barpad-20220212.diff)
 
-## slock
+### slstatus
 
-No patch; if using a compositor for transparency, prevent slock from becoming translucent with:
+To have a different status bar on various machines, make or copy one of the
+checked-in templates in ./slstatus and ensure there is only that file ending in
+.diff.
+
+Check in any changes by overwriting the appropriate .diff-less file or checking
+in a new file.
+
+### slock
+
+No patch; if using a compositor such as picom for transparency, prevent slock
+from becoming translucent with:
 
     # exclude dwm, dmenu and the slock screen locker
     focus-exclude = "x = 0 && y = 0 && override_redirect = true";
@@ -130,9 +133,9 @@ packages, flatpak.
 
 ## Obligatory Screenshot
 
-These are bland screenshots showing off "pertag"; I'm not 100% convinced I need pertag, 
-but for a multi-monitor set of desktops, I definitely need "rnmaster" which gives the 
-ability to toggle where the master pane goes, right or left.
+These are bland screenshots showing off "pertag"; I'm not 100% convinced I need
+pertag, but for a multi-monitor set of desktops, I definitely need "rnmaster"
+which gives the ability to toggle where the master pane goes, right or left.
 
 ![pertag - tag 1](https://raw.githubusercontent.com/solutionroute/suckless-patches/main/screenshots/pertag1.png)
 **Tag 1**

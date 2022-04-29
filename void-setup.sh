@@ -20,8 +20,10 @@ fi
 
 if [ -d $VOID_PACKAGES ]; then
 	echo "Installing patch files"
-	for ipkg in libXft dwm dmenu st slstatus; do
+	for ipkg in libXft-devel st dwm dmenu slstatus; do
 		mkdir -p $VOID_PACKAGES/srcpkgs/$ipkg/patches
+		# particularly for slstatus, ensure other files not left behind
+		rm -f $VOID_PACKAGES/srcpkgs/$ipkg/patches/$ipkg-sroute*.diff
 		echo "copying $SUCKLESS_PATCHES/$ipkg/*.diff to $VOID_PACKAGES/srcpkgs/$ipkg/patches"
 		cp $SUCKLESS_PATCHES/$ipkg/*.diff $VOID_PACKAGES/srcpkgs/$ipkg/patches
 	done
@@ -53,7 +55,7 @@ done
 
 echo "Building applications..."
 cd $VOID_PACKAGES
-for ipkg in libXft libXft-devel dwm dmenu st slstatus; do
+for ipkg in libXft-devel libXft st dwm dmenu slstatus; do
 	echo "Building $ipkg"
 	./xbps-src pkg $ipkg
 	xi -f $ipkg
