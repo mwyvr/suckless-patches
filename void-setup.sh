@@ -13,6 +13,11 @@
 SUCKLESS_PATCHES="$HOME/src/suckless-patches"
 VOID_PACKAGES="$HOME/src/void-packages"
 
+if ! command -v xi &>/dev/null; then
+	echo "Installing Void's xbps helper, xtools..."
+	sudo xbps-install -y xtools
+fi
+
 if [ -d $VOID_PACKAGES ]; then
 	echo "Installing patch files"
 	for ipkg in libXft dwm dmenu st slstatus; do
@@ -51,7 +56,7 @@ cd $VOID_PACKAGES
 for ipkg in libXft libXft-devel dwm dmenu st slstatus; do
 	echo "Building $ipkg"
 	./xbps-src pkg $ipkg
-	sudo xbps-install -f --repository hostdir/binpkgs $ipkg
+	xi -f $ipkg
 done
 
 echo "
