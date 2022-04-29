@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index a2ac963..9a9bee7 100644
+index a2ac963..25580ee 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -3,19 +3,30 @@
@@ -80,7 +80,7 @@ index a2ac963..9a9bee7 100644
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
  	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
  	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-@@ -95,6 +118,16 @@ static Key keys[] = {
+@@ -95,6 +118,17 @@ static Key keys[] = {
  	TAGKEYS(                        XK_8,                      7)
  	TAGKEYS(                        XK_9,                      8)
  	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
@@ -94,6 +94,7 @@ index a2ac963..9a9bee7 100644
 +	{ SUPERKEY|MODKEY,           XK_l,      spawn,          {.v = lockcmd } },
 +	{ SUPERKEY|MODKEY,           XK_s,      spawn,          {.v = sleepcmd } },
 +	{ SUPERKEY|MODKEY,           XK_h,      spawn,          {.v = hibernatecmd } },
++	{ 0,						 XK_Print,  spawn,          SHCMD("screenshot.sh")  },
  };
  
  /* button definitions */
