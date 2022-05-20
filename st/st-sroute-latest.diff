@@ -16,7 +16,7 @@ index 470ac86..5152b8b 100644
  
  .PHONY: all options clean dist install uninstall
 diff --git a/config.def.h b/config.def.h
-index 91ab8ca..fd56479 100644
+index 91ab8ca..18f236a 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -5,7 +5,14 @@
@@ -35,7 +35,7 @@ index 91ab8ca..fd56479 100644
  static int borderpx = 2;
  
  /*
-@@ -93,35 +100,38 @@ char *termname = "st-256color";
+@@ -93,35 +100,39 @@ char *termname = "st-256color";
   */
  unsigned int tabspaces = 8;
  
@@ -43,6 +43,7 @@ index 91ab8ca..fd56479 100644
 +float alpha = 0.4;
 +
  /* Terminal colors (16 first used in escape sequence) */
++/* nord colour scheme */
  static const char *colorname[] = {
  	/* 8 normal colors */
 -	"black",
@@ -53,14 +54,14 @@ index 91ab8ca..fd56479 100644
 -	"magenta3",
 -	"cyan3",
 -	"gray90",
-+	"#282a2e",  /* black */
-+	"#a54242",  /* red */
-+	"#8c9440",  /* green */
-+	"#de935f",  /* yellow */
-+	"#5f819d",  /* blue */
-+	"#85678f",  /* magenta */
-+	"#5e8d87",  /* cyan */
-+	"#707880",  /* gray */
++	"#3b4252",  /* black */
++	"#bf616a",  /* red */
++	"#a3be8c",  /* green */
++	"#ebcb8b",  /* yellow */
++	"#81a1c1",  /* blue */
++	"#b48ead",  /* magenta */
++	"#88c0d0",  /* cyan */
++	"#e5e9f0",  /* gray / white */
  
  	/* 8 bright colors */
 -	"gray50",
@@ -71,14 +72,14 @@ index 91ab8ca..fd56479 100644
 -	"magenta",
 -	"cyan",
 -	"white",
-+	"#373b41",  /* black */
-+	"#cc6666",  /* red */
-+	"#b5bd68",  /* green */
-+	"#f0c674",  /* yellow */
-+	"#81a2be",  /* blue */
-+	"#b294bb",  /* magenta */
-+	"#8abeb7",  /* cyan */
-+	"#c5c8c6",  /* gray */
++	"#4c566a",  /* black */
++	"#bf616a",  /* red */
++	"#a3be8c",  /* green */
++	"#ebcb8b",  /* yellow */
++	"#81a1c1",  /* blue */
++	"#b48ead",  /* magenta */
++	"#8fbcbb",  /* cyan */
++	"#eceff4",  /* gray */
  
  	[255] = 0,
  
@@ -87,14 +88,14 @@ index 91ab8ca..fd56479 100644
 -	"#555555",
 -	"gray90", /* default foreground colour */
 -	"black", /* default background colour */
-+	"#add8e6", /* 256 cursor */
-+	"#555555", /* 257 reverse cursor */
-+	"#959896", /* 258 default foreground colour */
-+	"#090d10", /* 259 default background colour */
++	"#d8dee9", /* 256 cursor */
++	"#2e3440", /* 257 reverse cursor */
++	"#aeb3bb", /* 258 default foreground colour */
++	"#050508", /* 259 default background colour */
  };
  
  
-@@ -176,6 +186,8 @@ static uint forcemousemod = ShiftMask;
+@@ -176,6 +187,8 @@ static uint forcemousemod = ShiftMask;
   */
  static MouseShortcut mshortcuts[] = {
  	/* mask                 button   function        argument       release */
@@ -103,7 +104,7 @@ index 91ab8ca..fd56479 100644
  	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
  	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
  	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-@@ -201,6 +213,8 @@ static Shortcut shortcuts[] = {
+@@ -201,6 +214,8 @@ static Shortcut shortcuts[] = {
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
