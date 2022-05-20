@@ -16,17 +16,19 @@ index 470ac86..5152b8b 100644
  
  .PHONY: all options clean dist install uninstall
 diff --git a/config.def.h b/config.def.h
-index 91ab8ca..18f236a 100644
+index 91ab8ca..59ffb90 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -5,7 +5,14 @@
+@@ -5,7 +5,16 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
 -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
++// static char *font = "monospace:size=11:antialias=true:autohint=true";
 +static char *font = "monospace:size=11:antialias=true:autohint=true";
 +/* Spare fonts */
 +static char *font2[] = {
++    "DejaVuSansMono Nerd Font:size=11:antialias=true:autohint=true",
 +	/* "Powerline:pixelsize=12:antialias=true:autohint=true", */
 +/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
 +/*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
@@ -35,7 +37,7 @@ index 91ab8ca..18f236a 100644
  static int borderpx = 2;
  
  /*
-@@ -93,35 +100,39 @@ char *termname = "st-256color";
+@@ -93,35 +102,39 @@ char *termname = "st-256color";
   */
  unsigned int tabspaces = 8;
  
@@ -95,7 +97,7 @@ index 91ab8ca..18f236a 100644
  };
  
  
-@@ -176,6 +187,8 @@ static uint forcemousemod = ShiftMask;
+@@ -176,6 +189,8 @@ static uint forcemousemod = ShiftMask;
   */
  static MouseShortcut mshortcuts[] = {
  	/* mask                 button   function        argument       release */
@@ -104,7 +106,7 @@ index 91ab8ca..18f236a 100644
  	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
  	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
  	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-@@ -201,6 +214,8 @@ static Shortcut shortcuts[] = {
+@@ -201,6 +216,8 @@ static Shortcut shortcuts[] = {
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
