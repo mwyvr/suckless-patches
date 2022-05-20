@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index a2ac963..25580ee 100644
+index a2ac963..db87fb4 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -3,19 +3,30 @@
@@ -55,10 +55,12 @@ index a2ac963..25580ee 100644
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -59,6 +71,16 @@ static const Layout layouts[] = {
+@@ -58,7 +70,17 @@ static const Layout layouts[] = {
+ /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
  static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
- static const char *termcmd[]  = { "st", NULL };
+-static const char *termcmd[]  = { "st", NULL };
++static const char *termcmd[]  = { "alacritty", NULL };
 +/* multimedia/special function keys, in dwm.c add: #include <X11/XF86keysym.h> */
 +static const char *mutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 +static const char *mutemiccmd[] = { "pactl", "set-source-mute", "0", "toggle", NULL };
@@ -98,6 +100,20 @@ index a2ac963..25580ee 100644
  };
  
  /* button definitions */
+diff --git a/config.mk b/config.mk
+index b6eb7e0..a14475f 100644
+--- a/config.mk
++++ b/config.mk
+@@ -22,8 +22,7 @@ FREETYPEINC = /usr/include/freetype2
+ 
+ # includes and libs
+ INCS = -I${X11INC} -I${FREETYPEINC}
+-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS}
+-
++LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender
+ # flags
+ CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+ #CFLAGS   = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
 diff --git a/dwm.c b/dwm.c
 index 0fc328a..1dd298a 100644
 --- a/dwm.c
