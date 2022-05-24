@@ -24,8 +24,9 @@ if [ -d $VOID_PACKAGES ]; then
 		mkdir -p $VOID_PACKAGES/srcpkgs/$ipkg/patches
 		# particularly for slstatus, ensure other files not left behind
 		rm -f $VOID_PACKAGES/srcpkgs/$ipkg/patches/$ipkg-sroute*.diff
-		echo "copying $SUCKLESS_PATCHES/$ipkg/*.diff to $VOID_PACKAGES/srcpkgs/$ipkg/patches"
-		cp $SUCKLESS_PATCHES/$ipkg/*.diff $VOID_PACKAGES/srcpkgs/$ipkg/patches
+		rm -f $VOID_PACKAGES/srcpkgs/$ipkg/patches/$ipkg-solutionroute.diff
+		echo "copying $SUCKLESS_PATCHES/$ipkg/$ipkg-solutionroute.diff to $VOID_PACKAGES/srcpkgs/$ipkg/patches"
+		cp $SUCKLESS_PATCHES/$ipkg/$ipkg-solutionroute.diff $VOID_PACKAGES/srcpkgs/$ipkg/patches
 	done
 else
 	echo "
