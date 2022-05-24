@@ -35,7 +35,7 @@ index 92c252e..7f9e85f 100644
  #elif defined(__OpenBSD__)
  	#include <net/if.h>
 diff --git a/config.def.h b/config.def.h
-index 93a875a..94067d1 100644
+index 93a875a..dd30532 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -1,7 +1,7 @@
@@ -59,7 +59,7 @@ index 93a875a..94067d1 100644
 +	{ battery_state,		" %s",      "BAT0" },
 +	// { wifi_perc,			" %s%%",    "wlp0s20f3" },
 +	{ wifi_essid,			" %s",	"wlp0s20f3" },
-+	{ datetime,				" %s",    "%F %H:%M" },
++	{ datetime,				" %s",    "%A %B %e %H:%M" },
  };
 diff --git a/config.mk b/config.mk
 index 2516e6e..b0b52c7 100644
