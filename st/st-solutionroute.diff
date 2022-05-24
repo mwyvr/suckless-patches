@@ -16,7 +16,7 @@ index 470ac86..5152b8b 100644
  
  .PHONY: all options clean dist install uninstall
 diff --git a/config.def.h b/config.def.h
-index 91ab8ca..59ffb90 100644
+index 91ab8ca..0574e54 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -5,7 +5,16 @@
@@ -25,10 +25,10 @@ index 91ab8ca..59ffb90 100644
   */
 -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 +// static char *font = "monospace:size=11:antialias=true:autohint=true";
-+static char *font = "monospace:size=11:antialias=true:autohint=true";
++static char *font = "RobotoMono Nerd Font:size=11:antialias=true:autohint=true";
 +/* Spare fonts */
 +static char *font2[] = {
-+    "DejaVuSansMono Nerd Font:size=11:antialias=true:autohint=true",
++    // "DejaVuSansMono Nerd Font:size=11:antialias=true:autohint=true",
 +	/* "Powerline:pixelsize=12:antialias=true:autohint=true", */
 +/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
 +/*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
@@ -42,7 +42,7 @@ index 91ab8ca..59ffb90 100644
  unsigned int tabspaces = 8;
  
 +/* bg opacity */
-+float alpha = 0.4;
++float alpha = 0.0;
 +
  /* Terminal colors (16 first used in escape sequence) */
 +/* nord colour scheme */
@@ -92,7 +92,7 @@ index 91ab8ca..59ffb90 100644
 -	"black", /* default background colour */
 +	"#d8dee9", /* 256 cursor */
 +	"#2e3440", /* 257 reverse cursor */
-+	"#aeb3bb", /* 258 default foreground colour */
++	"#a5abb6", /* 258 default foreground colour */
 +	"#050508", /* 259 default background colour */
  };
  
