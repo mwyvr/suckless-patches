@@ -1,0 +1,76 @@
+diff --git a/components/battery.c b/components/battery.c
+index f2b0f14..1bcfc5f 100644
+--- a/components/battery.c
++++ b/components/battery.c
+@@ -50,9 +50,9 @@
+ 			char *state;
+ 			char *symbol;
+ 		} map[] = {
+-			{ "Charging",    "+" },
+-			{ "Discharging", "-" },
+-			{ "Full",        "o" },
++			{ "Charging",    "" },
++			{ "Discharging", "" },
++			{ "Full",        "" },
+ 		};
+ 		size_t i;
+ 		char path[PATH_MAX], state[12];
+diff --git a/components/wifi.c b/components/wifi.c
+index 92c252e..7f9e85f 100644
+--- a/components/wifi.c
++++ b/components/wifi.c
+@@ -95,10 +95,12 @@
+ 		close(sockfd);
+ 
+ 		if (!strcmp(id, "")) {
+-			return NULL;
++			// return NULL;
++			return "睊";
+ 		}
+ 
+-		return id;
++		// return id;
++		return bprintf("%s  ", id);
+ 	}
+ #elif defined(__OpenBSD__)
+ 	#include <net/if.h>
+diff --git a/config.def.h b/config.def.h
+index 93a875a..d3f93c9 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -1,7 +1,7 @@
+ /* See LICENSE file for copyright and license details. */
+ 
+ /* interval between updates (in ms) */
+-const unsigned int interval = 1000;
++const unsigned int interval = 1000*10;
+ 
+ /* text to show if no value can be retrieved */
+ static const char unknown_str[] = "n/a";
+@@ -64,6 +64,11 @@ static const char unknown_str[] = "n/a";
+  * wifi_essid          WiFi ESSID                      interface name (wlan0)
+  */
+ static const struct arg args[] = {
+-	/* function format          argument */
+-	{ datetime, "%s",           "%F %T" },
++	/* function				format		argument */
++	// { battery_remaining,	"%s",		"BAT0" },
++	{ battery_perc,			" %s%%",    "BAT1" },
++	{ battery_state,		" %s",      "BAT1" },
++	// { wifi_perc,			" %s%%",    "wlp0s20f3" },
++	{ wifi_essid,			" %s",	"wlp1s0" },
++	{ datetime,				" %s",    "%A %B %e %H:%M" },
+ };
+diff --git a/config.mk b/config.mk
+index 2516e6e..b0b52c7 100644
+--- a/config.mk
++++ b/config.mk
+@@ -4,7 +4,7 @@ VERSION = 0
+ # customize below to fit your system
+ 
+ # paths
+-PREFIX = /usr/local
++PREFIX = /usr
+ MANPREFIX = $(PREFIX)/share/man
+ 
+ X11INC = /usr/X11R6/include
