@@ -10,8 +10,14 @@
 #   echo XBPS_ALLOW_RESTRICTED=yes >> etc/conf
 #   ./xbps-src binary-bootstrap
 
+OS_RELEASE=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"' | tr '[:upper:]' '[:lower:]')
 SUCKLESS_PATCHES="$HOME/src/suckless-patches"
 VOID_PACKAGES="$HOME/src/void-packages"
+
+if [ $OS_RELEASE != "void" ]; then
+    echo "This script only runs on Void Linux; use build-repo.sh for others."
+    exit
+fi
 
 if ! command -v xi &>/dev/null; then
 	echo "Installing Void's xbps helper, xtools..."
@@ -19,12 +25,10 @@ if ! command -v xi &>/dev/null; then
 fi
 
 if [ -d $VOID_PACKAGES ]; then
-	echo "Installing patch files"
-	for ipkg in libXft-devel st dwm dmenu slstatus; do
+	echo "Installing patch files for libXft-devel, st, dwm, demnu."
+	echo "Build and install slstatus from the repo, not from void-packages"
+	for ipkg in libXft-devel st dwm dmenu; do
 		mkdir -p $VOID_PACKAGES/srcpkgs/$ipkg/patches
-		# particularly for slstatus, ensure other files not left behind
-		rm -f $VOID_PACKAGES/srcpkgs/$ipkg/patches/$ipkg-sroute*.diff
-		rm -f $VOID_PACKAGES/srcpkgs/$ipkg/patches/$ipkg-solutionroute.diff
 		echo "copying $SUCKLESS_PATCHES/$ipkg/$ipkg-solutionroute.diff to $VOID_PACKAGES/srcpkgs/$ipkg/patches"
 		cp $SUCKLESS_PATCHES/$ipkg/$ipkg-solutionroute.diff $VOID_PACKAGES/srcpkgs/$ipkg/patches
 	done
@@ -56,7 +60,7 @@ done
 
 echo "Building applications..."
 cd $VOID_PACKAGES
-for ipkg in libXft-devel libXft st dwm dmenu slstatus; do
+for ipkg in libXft-devel st dwm dmenu; do
 	echo "Building $ipkg"
 	./xbps-src pkg $ipkg
 	xi -f $ipkg
