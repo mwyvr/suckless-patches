@@ -16,36 +16,26 @@ index 470ac86..5152b8b 100644
  
  .PHONY: all options clean dist install uninstall
 diff --git a/config.def.h b/config.def.h
-index 91ab8ca..0574e54 100644
+index 91ab8ca..0f92ef1 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -5,7 +5,16 @@
+@@ -5,7 +5,7 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
 -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-+// static char *font = "monospace:size=11:antialias=true:autohint=true";
-+static char *font = "RobotoMono Nerd Font:size=11:antialias=true:autohint=true";
-+/* Spare fonts */
-+static char *font2[] = {
-+    // "DejaVuSansMono Nerd Font:size=11:antialias=true:autohint=true",
-+	/* "Powerline:pixelsize=12:antialias=true:autohint=true", */
-+/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
-+/*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
-+};
-+
++static char *font = "monospace:size=11:antialias=true:autohint=true";
  static int borderpx = 2;
  
  /*
-@@ -93,35 +102,39 @@ char *termname = "st-256color";
+@@ -93,35 +93,38 @@ char *termname = "st-256color";
   */
  unsigned int tabspaces = 8;
  
 +/* bg opacity */
-+float alpha = 0.0;
++float alpha = 0.6;
 +
  /* Terminal colors (16 first used in escape sequence) */
-+/* nord colour scheme */
  static const char *colorname[] = {
  	/* 8 normal colors */
 -	"black",
@@ -56,14 +46,14 @@ index 91ab8ca..0574e54 100644
 -	"magenta3",
 -	"cyan3",
 -	"gray90",
-+	"#3b4252",  /* black */
-+	"#bf616a",  /* red */
-+	"#a3be8c",  /* green */
-+	"#ebcb8b",  /* yellow */
-+	"#81a1c1",  /* blue */
-+	"#b48ead",  /* magenta */
-+	"#88c0d0",  /* cyan */
-+	"#e5e9f0",  /* gray / white */
++	"#282a2e",  /* black */
++	"#a54242",  /* red */
++	"#8c9440",  /* green */
++	"#de935f",  /* yellow */
++	"#5f819d",  /* blue */
++	"#85678f",  /* magenta */
++	"#5e8d87",  /* cyan */
++	"#707880",  /* gray */
  
  	/* 8 bright colors */
 -	"gray50",
@@ -74,14 +64,14 @@ index 91ab8ca..0574e54 100644
 -	"magenta",
 -	"cyan",
 -	"white",
-+	"#4c566a",  /* black */
-+	"#bf616a",  /* red */
-+	"#a3be8c",  /* green */
-+	"#ebcb8b",  /* yellow */
-+	"#81a1c1",  /* blue */
-+	"#b48ead",  /* magenta */
-+	"#8fbcbb",  /* cyan */
-+	"#eceff4",  /* gray */
++	"#373b41",  /* black */
++	"#cc6666",  /* red */
++	"#b5bd68",  /* green */
++	"#f0c674",  /* yellow */
++	"#81a2be",  /* blue */
++	"#b294bb",  /* magenta */
++	"#8abeb7",  /* cyan */
++	"#c5c8c6",  /* gray */
  
  	[255] = 0,
  
@@ -90,14 +80,14 @@ index 91ab8ca..0574e54 100644
 -	"#555555",
 -	"gray90", /* default foreground colour */
 -	"black", /* default background colour */
-+	"#d8dee9", /* 256 cursor */
-+	"#2e3440", /* 257 reverse cursor */
-+	"#a5abb6", /* 258 default foreground colour */
-+	"#050508", /* 259 default background colour */
++	"#add8e6", /* 256 cursor */
++	"#555555", /* 257 reverse cursor */
++	"#959896", /* 258 default foreground colour */
++	"#090d10", /* 259 default background colour */
  };
  
  
-@@ -176,6 +189,8 @@ static uint forcemousemod = ShiftMask;
+@@ -176,6 +179,8 @@ static uint forcemousemod = ShiftMask;
   */
  static MouseShortcut mshortcuts[] = {
  	/* mask                 button   function        argument       release */
@@ -106,7 +96,7 @@ index 91ab8ca..0574e54 100644
  	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
  	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
  	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-@@ -201,6 +216,8 @@ static Shortcut shortcuts[] = {
+@@ -201,6 +206,8 @@ static Shortcut shortcuts[] = {
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
@@ -822,7 +812,7 @@ index fd3b0d8..073851a 100644
  extern unsigned int defaultcs;
 +extern float alpha;
 diff --git a/x.c b/x.c
-index 2a3bd38..13e4751 100644
+index 2a3bd38..b81f5be 100644
 --- a/x.c
 +++ b/x.c
 @@ -59,6 +59,8 @@ static void zoom(const Arg *);
@@ -842,16 +832,7 @@ index 2a3bd38..13e4751 100644
  	int l, t; /* left and top offset */
  	int gm; /* geometry mask */
  } XWindow;
-@@ -157,6 +160,8 @@ static void xhints(void);
- static int xloadcolor(int, const char *, Color *);
- static int xloadfont(Font *, FcPattern *);
- static void xloadfonts(const char *, double);
-+static int xloadsparefont(FcPattern *, int);
-+static void xloadsparefonts(void);
- static void xunloadfont(Font *);
- static void xunloadfonts(void);
- static void xsetenv(void);
-@@ -243,6 +248,7 @@ static char *usedfont = NULL;
+@@ -243,6 +246,7 @@ static char *usedfont = NULL;
  static double usedfontsize = 0;
  static double defaultfontsize = 0;
  
@@ -859,15 +840,7 @@ index 2a3bd38..13e4751 100644
  static char *opt_class = NULL;
  static char **opt_cmd  = NULL;
  static char *opt_embed = NULL;
-@@ -306,6 +312,7 @@ zoomabs(const Arg *arg)
- {
- 	xunloadfonts();
- 	xloadfonts(usedfont, arg->f);
-+	xloadsparefonts();
- 	cresize(0, 0);
- 	redraw();
- 	xhints();
-@@ -752,7 +759,7 @@ xresize(int col, int row)
+@@ -752,7 +756,7 @@ xresize(int col, int row)
  
  	XFreePixmap(xw.dpy, xw.buf);
  	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h,
@@ -876,7 +849,7 @@ index 2a3bd38..13e4751 100644
  	XftDrawChange(xw.draw, xw.buf);
  	xclear(0, 0, win.w, win.h);
  
-@@ -812,6 +819,13 @@ xloadcols(void)
+@@ -812,6 +816,13 @@ xloadcols(void)
  			else
  				die("could not allocate color %d\n", i);
  		}
@@ -890,109 +863,7 @@ index 2a3bd38..13e4751 100644
  	loaded = 1;
  }
  
-@@ -1050,6 +1064,101 @@ xloadfonts(const char *fontstr, double fontsize)
- 	FcPatternDestroy(pattern);
- }
- 
-+int
-+xloadsparefont(FcPattern *pattern, int flags)
-+{
-+	FcPattern *match;
-+	FcResult result;
-+	
-+	match = FcFontMatch(NULL, pattern, &result);
-+	if (!match) {
-+		return 1;
-+	}
-+
-+	if (!(frc[frclen].font = XftFontOpenPattern(xw.dpy, match))) {
-+		FcPatternDestroy(match);
-+		return 1;
-+	}
-+
-+	frc[frclen].flags = flags;
-+	/* Believe U+0000 glyph will present in each default font */
-+	frc[frclen].unicodep = 0;
-+	frclen++;
-+
-+	return 0;
-+}
-+
-+void
-+xloadsparefonts(void)
-+{
-+	FcPattern *pattern;
-+	double sizeshift, fontval;
-+	int fc;
-+	char **fp;
-+
-+	if (frclen != 0)
-+		die("can't embed spare fonts. cache isn't empty");
-+
-+	/* Calculate count of spare fonts */
-+	fc = sizeof(font2) / sizeof(*font2);
-+	if (fc == 0)
-+		return;
-+
-+	/* Allocate memory for cache entries. */
-+	if (frccap < 4 * fc) {
-+		frccap += 4 * fc - frccap;
-+		frc = xrealloc(frc, frccap * sizeof(Fontcache));
-+	}
-+
-+	for (fp = font2; fp - font2 < fc; ++fp) {
-+	
-+		if (**fp == '-')
-+			pattern = XftXlfdParse(*fp, False, False);
-+		else
-+			pattern = FcNameParse((FcChar8 *)*fp);
-+	
-+		if (!pattern)
-+			die("can't open spare font %s\n", *fp);
-+	   		
-+		if (defaultfontsize > 0) {
-+			sizeshift = usedfontsize - defaultfontsize;
-+			if (sizeshift != 0 &&
-+					FcPatternGetDouble(pattern, FC_PIXEL_SIZE, 0, &fontval) ==
-+					FcResultMatch) {	
-+				fontval += sizeshift;
-+				FcPatternDel(pattern, FC_PIXEL_SIZE);
-+				FcPatternDel(pattern, FC_SIZE);
-+				FcPatternAddDouble(pattern, FC_PIXEL_SIZE, fontval);
-+			}
-+		}
-+	
-+		FcPatternAddBool(pattern, FC_SCALABLE, 1);
-+	
-+		FcConfigSubstitute(NULL, pattern, FcMatchPattern);
-+		XftDefaultSubstitute(xw.dpy, xw.scr, pattern);
-+	
-+		if (xloadsparefont(pattern, FRC_NORMAL))
-+			die("can't open spare font %s\n", *fp);
-+	
-+		FcPatternDel(pattern, FC_SLANT);
-+		FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
-+		if (xloadsparefont(pattern, FRC_ITALIC))
-+			die("can't open spare font %s\n", *fp);
-+			
-+		FcPatternDel(pattern, FC_WEIGHT);
-+		FcPatternAddInteger(pattern, FC_WEIGHT, FC_WEIGHT_BOLD);
-+		if (xloadsparefont(pattern, FRC_ITALICBOLD))
-+			die("can't open spare font %s\n", *fp);
-+	
-+		FcPatternDel(pattern, FC_SLANT);
-+		FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ROMAN);
-+		if (xloadsparefont(pattern, FRC_BOLD))
-+			die("can't open spare font %s\n", *fp);
-+	
-+		FcPatternDestroy(pattern);
-+	}
-+}
-+
- void
- xunloadfont(Font *f)
- {
-@@ -1134,11 +1243,23 @@ xinit(int cols, int rows)
+@@ -1134,11 +1145,23 @@ xinit(int cols, int rows)
  	Window parent;
  	pid_t thispid = getpid();
  	XColor xmousefg, xmousebg;
@@ -1017,20 +888,16 @@ index 2a3bd38..13e4751 100644
  
  	/* font */
  	if (!FcInit())
-@@ -1147,8 +1268,11 @@ xinit(int cols, int rows)
- 	usedfont = (opt_font == NULL)? font : opt_font;
+@@ -1148,7 +1171,7 @@ xinit(int cols, int rows)
  	xloadfonts(usedfont, 0);
  
-+	/* spare fonts */
-+	xloadsparefonts();
-+
  	/* colors */
 -	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
 +	xw.cmap = XCreateColormap(xw.dpy, parent, xw.vis, None);
  	xloadcols();
  
  	/* adjust fixed window geometry */
-@@ -1168,19 +1292,15 @@ xinit(int cols, int rows)
+@@ -1168,19 +1191,15 @@ xinit(int cols, int rows)
  		| ButtonMotionMask | ButtonPressMask | ButtonReleaseMask;
  	xw.attrs.colormap = xw.cmap;
  
@@ -1053,7 +920,7 @@ index 2a3bd38..13e4751 100644
  	XSetForeground(xw.dpy, dc.gc, dc.col[defaultbg].pixel);
  	XFillRectangle(xw.dpy, xw.buf, dc.gc, 0, 0, win.w, win.h);
  
-@@ -2035,6 +2155,9 @@ main(int argc, char *argv[])
+@@ -2035,6 +2054,9 @@ main(int argc, char *argv[])
  	case 'a':
  		allowaltscreen = 0;
  		break;
